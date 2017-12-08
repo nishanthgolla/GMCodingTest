@@ -23,6 +23,12 @@
     [super viewDidLoad];
     _collectionView.delegate = self;
     _collectionView.dataSource =self;
+    
+    NSString *str = @"assessment2017";
+    
+
+    
+    NSLog(@"%@", [str substringToIndex:6]);
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -31,7 +37,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//===============To Submit The request==================================================
+//===============To Submit The request================================================
 - (IBAction)submitRequest:(id)sender {
     
     if ([_cityTextField.text length] != 0 && [_stateTextField.text length] != 0) {
@@ -59,10 +65,10 @@
 //========================Building the URL for the text fields============================
 -(NSURL*)buildingUrltheCity:(NSString *)city andState:(NSString *)state{
     
-   NSString *formattedCityString = [city stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-
-  NSString *newString = [NSString stringWithFormat:@"http://api.wunderground.com/api/a43b8912fe6ee17e/forecast/geolookup/conditions/q/%@/%@%@",state,formattedCityString,@".json"];
-        
+    NSString *formattedCityString = [city stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    
+    NSString *newString = [NSString stringWithFormat:@"http://api.wunderground.com/api/a43b8912fe6ee17e/forecast/geolookup/conditions/q/%@/%@%@",state,formattedCityString,@".json"];
+    
     NSURL *finalUrl = [NSURL URLWithString:newString];
     return finalUrl;
 }
@@ -70,6 +76,8 @@
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
+
+#pragma mark COLLECTION VIEW DELEGATE METHODS
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return _FinalData.count;
@@ -85,5 +93,6 @@
     
     return cell;
 }
+
 
 @end
